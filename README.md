@@ -1,5 +1,7 @@
 # Javacodewars
-  Java Codewars web application was developed to help as an exercise storage for professors in the Java Programming course and is a medium for students and professors to do exercises. Since the old exercises do not attract students to want to do the exercises. And for professors, they must save the propositions on their own devices.   
+
+  Java Codewars web application was developed to help as an exercise storage for professors in the Java Programming course and is a medium for students and professors to do exercises. Since the old exercises do not attract students to want to do the exercises. And for professors, they must save the propositions on their own devices.
+  
   The developed Java Codewars web application can meet the professor needs for enabling professors to store homework and exercises, so it is easy to search and use as an exercise in the following courses. Create courses as a medium for disseminating exercises to students. Allowing the professors to know the difficulty of the exercises on the students from the following information: exercise-taking time, examination with Test JUnit and Copy-Paste during doing exercises. The last one is to attract students to be more interested in doing exercises and the results of the exercises will be shown immediately. Furthermore, it also provides many exercises in many difficulty levels to practice. 
 
 # Prerequisites
