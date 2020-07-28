@@ -9,7 +9,7 @@
   $salt = 'javacodewars' ;
 
     $query = "SELECT * FROM student WHERE student_id = '$user' ";
-    $result1 = mysqli_query($dbcon, $query) or die(mysqli_error());
+    $result1 = mysqli_query($dbcon, $query) or die(mysqli_error($dbcon));
     if($result1 -> num_rows == 1) {
         $row = mysqli_fetch_assoc($result1) ;
         $chack_pass = (isset($row['student_pass'])) ? $row['student_pass'] : ''; 
@@ -19,7 +19,7 @@
         if($check == 0) {
             $hash_pass_new = hash_hmac('sha256',$password_new,$salt);
             $sql = "UPDATE student SET  student_pass = '$hash_pass_new'  WHERE student_id = '$user' ";
-            $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+            $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
                 if(!($result)) {
                     mysqli_free_result($result1);
                     mysqli_close($dbcon);
@@ -39,7 +39,7 @@
     }else {
 
         $query = "SELECT * FROM teacher WHERE teacher_user = '$user' ";
-        $result1 = mysqli_query($dbcon, $query) or die(mysqli_error());
+        $result1 = mysqli_query($dbcon, $query) or die(mysqli_error($dbcon));
         $row = mysqli_fetch_assoc($result1) ;
         $chack_pass =  (isset($row['teacher_pass'])) ? $row['teacher_pass'] : '';
         $hash_pass_old = hash_hmac('sha256',$password_old,$salt);
@@ -48,7 +48,7 @@
         if($check == 0) {
             $hash_pass_new = hash_hmac('sha256',$password_new,$salt);
             $sql = "UPDATE teacher SET  teacher_pass = '$hash_pass_new'  WHERE teacher_user = '$user' ";
-            $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+            $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
                 if(!($result)) {
                     mysqli_free_result($result1);
                     mysqli_close($dbcon);
@@ -66,5 +66,3 @@
         }
 
     }
-
- ?>

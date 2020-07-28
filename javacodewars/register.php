@@ -10,7 +10,7 @@
   $hash_pass = hash_hmac('sha256',$teacher_pass,$salt);
 
   $user_check = "SELECT teacher_user FROM teacher WHERE teacher_user = '$teacher_user'  ";
-  $result1 = mysqli_query($dbcon, $user_check) or die(mysqli_error());
+  $result1 = mysqli_query($dbcon, $user_check) or die(mysqli_error($dbcon));
   if($result1 -> num_rows == 1){
     mysqli_free_result($result1);
     response_message(500,"Unsuccess. Username already exists");
@@ -18,7 +18,7 @@
   }
 
   $email_check1 = "SELECT teacher_email FROM teacher WHERE teacher_email = '$teacher_email'  ";
-  $result2 = mysqli_query($dbcon, $email_check1) or die(mysqli_error());
+  $result2 = mysqli_query($dbcon, $email_check1) or die(mysqli_error($dbcon));
   $num2=mysqli_num_rows($result2);
   if($result2 -> num_rows == 1){
     
@@ -29,7 +29,7 @@
   }
 
   $email_check2 = "SELECT student_email FROM student WHERE student_email = '$teacher_email' ";
-  $result3 = mysqli_query($dbcon, $email_check2) or die(mysqli_error());
+  $result3 = mysqli_query($dbcon, $email_check2) or die(mysqli_error($dbcon));
   $num3=mysqli_num_rows($result3);
   if($result3 -> num_rows == 1){
     mysqli_free_result($result1);
@@ -40,7 +40,7 @@
   }else{
     
     $query = "INSERT INTO teacher(teacher_user,teacher_email,teacher_pass) VALUES ('$teacher_user','$teacher_email','$hash_pass')" ;
-    $result = mysqli_query($dbcon,$query) or die(mysqli_error());
+    $result = mysqli_query($dbcon,$query) or die(mysqli_error($dbcon));
     if(!($result)){
       response_message(500,"Unsuccess Regiser");
     }
@@ -49,4 +49,3 @@
     mysqli_free_result($result3);
     response_message(200,"Success Regiser");
   }
- ?>

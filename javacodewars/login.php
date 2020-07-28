@@ -38,7 +38,7 @@
    }
 
   $sql3 = "SELECT teacher_user , teacher_email , teacher_picture FROM teacher WHERE teacher_email='$email' AND teacher_pass='$hash_pass'";
-  $result3 = mysqli_query($dbcon, $sql3) or die(mysqli_error());
+  $result3 = mysqli_query($dbcon, $sql3) or die(mysqli_error($dbcon));
   if($result3 -> num_rows == 1){
       $row = $result3->fetch_assoc();
       $results_array[] = $row;
@@ -51,7 +51,7 @@
 
 
   $sql4 = "SELECT student_id ,student_name,student_email,student_picture FROM student WHERE student_email ='$email' AND student_pass='$hash_pass'";
-  $result4 = mysqli_query($dbcon, $sql4) or die(mysqli_error());
+  $result4 = mysqli_query($dbcon, $sql4) or die(mysqli_error($dbcon));
   if($result4 -> num_rows == 1){
       $row = $result4->fetch_assoc();
       $results_array[] = $row;
@@ -69,5 +69,3 @@
   mysqli_free_result($result4);
   mysqli_close($dbcon);
   response_message(500,"Unsuccess ,Username and Password Invalid 5555555---T^T");
-
- ?>

@@ -42,7 +42,7 @@ $testcase_id = "";
       }
 
             $query4 = " SELECT question_id FROM question  WHERE teacher_user = '$teacher_user' AND question_name = '$question_name' LIMIT 1 ";
-            $result4 = mysqli_query($dbcon,$query4) or die(mysqli_error()); /*เลือก id question */
+            $result4 = mysqli_query($dbcon,$query4) or die(mysqli_error($dbcon)); /*เลือก id question */
             if($result4){
                 while($row = mysqli_fetch_array($result4)){
                   $question_id = $row['question_id'];
@@ -56,7 +56,7 @@ $testcase_id = "";
        foreach($testcase_testcase_decode as $key => $testcase ) {
           $testcase_str =  mysqli_real_escape_string($dbcon,$testcase["testcase_testcase"]) ;
           $query2 = " INSERT INTO testcase(testcase_testcase,question_id) VALUES ('$testcase_str','$question_id')" ;
-          $result2 = mysqli_query($dbcon,$query2) or die(mysqli_error()); /**เพิ่ม testcase */
+          $result2 = mysqli_query($dbcon,$query2) or die(mysqli_error($dbcon)); /**เพิ่ม testcase */
           if(!($result2)){
                 response_message(500,"Unsuccess");
             }
@@ -72,7 +72,7 @@ $testcase_id = "";
             }
 
                   $query6 = " SELECT tag_id FROM taglist  WHERE tag_tag = '$tag_low' ORDER BY tag_id DESC LIMIT 1";
-                  $result6 = mysqli_query($dbcon,$query6) or die(mysqli_error()); /** เลือก id taglist  */
+                  $result6 = mysqli_query($dbcon,$query6) or die(mysqli_error($dbcon)); /** เลือก id taglist  */
                   if($result6){
                     $row2 = mysqli_fetch_array($result6);
                     $tag_id = $row2['tag_id'];
@@ -94,7 +94,3 @@ $testcase_id = "";
         mysqli_free_result($result7);
         mysqli_close($dbcon); 
         response_message(200,"Success");
-
-
-
- ?>

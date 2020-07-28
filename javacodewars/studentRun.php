@@ -37,7 +37,7 @@ if( !(file_exists("complieAndRun")) ) {
         fclose($file_guide);
 
     $sql = "SELECT testcase_testcase FROM testcase WHERE question_id = '$question_id' ";
-    $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+    $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
     while ($row = mysqli_fetch_assoc($result)) {
         
         $file_testcase=fopen($path.$filename_testcase,"a+");
@@ -116,5 +116,3 @@ if( !(file_exists("complieAndRun")) ) {
         /*echo "Unsusess"."<hr>" ;
         echo "<pre>$error</pre>";*/
     }
-
- ?>

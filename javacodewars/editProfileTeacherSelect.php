@@ -6,7 +6,7 @@
 
 
   $sql = "SELECT teacher_email,teacher_picture FROM teacher WHERE teacher_user = '$teacher_user' LIMIT 1 ";
-  $result = mysqli_query($dbcon, $sql) or die(mysqli_error());
+  $result = mysqli_query($dbcon, $sql) or die(mysqli_error($dbcon));
   $results_array = array();
 
     if(empty($result)){
@@ -26,8 +26,3 @@
     mysqli_free_result($result);
     mysqli_close($dbcon);
     response_message(200,"Success",$results_array);
-
-    
-
-
- ?>

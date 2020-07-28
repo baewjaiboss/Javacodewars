@@ -86,13 +86,13 @@ $student_email_file = array();
     for($i=0 ; $i<count($student_id) ; $i++){
        // echo $student_id[$i] ." ". $student_pass[$i] ." ". $student_name[$i] ." ". $student_email[$i] ."<br>" ;
         $sql = " SELECT student_id FROM student WHERE student_id = '$student_id[$i]' " ;
-        $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+        $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
         $num=mysqli_num_rows($result);
         if($num < 1){ /**พึ่งลงเรียนครั้งแรก เพิ่มลงใน database */
             //$salt = 'javacodewars' ;
             //$hash_pass = hash_hmac('sha256',$student_pass[$i],$salt);
             $sql1 = " INSERT INTO student(student_id,student_name,student_email) VALUES ('$student_id[$i]','$student_name[$i]','$student_email[$i]')" ;
-            $result1 = mysqli_query($dbcon,$sql1) or die(mysqli_error());
+            $result1 = mysqli_query($dbcon,$sql1) or die(mysqli_error($dbcon));
                 if(!($result1)){
                     response_message(500,"Unsuccess");
                 }
@@ -101,11 +101,11 @@ $student_email_file = array();
         }
 
         $sql2 = " SELECT student_id,course_id FROM coursestudent WHERE student_id = '$student_id[$i]' AND course_id = '$course_id'" ;
-        $result2 = mysqli_query($dbcon,$sql2) or die(mysqli_error());
+        $result2 = mysqli_query($dbcon,$sql2) or die(mysqli_error($dbcon));
         $num2=mysqli_num_rows($result2);
         if($num2 < 1){ /**เพิ่มนักศึกษาลงในรายวิชา */
             $sql3 = " INSERT INTO coursestudent(student_id,course_id) VALUES ('$student_id[$i]','$course_id')" ;
-            $result3 = mysqli_query($dbcon,$sql3) or die(mysqli_error());
+            $result3 = mysqli_query($dbcon,$sql3) or die(mysqli_error($dbcon));
                 if(!($result3)){
                     response_message(500,"Unsuccess");
                 }
@@ -118,5 +118,3 @@ mysqli_free_result($result);
 mysqli_free_result($result2);
 mysqli_close($dbcon);
 response_message(200,"Success", $result_array);
-
-?>  

@@ -15,7 +15,7 @@
   if($count4 == 1){
 
     $sql = " SELECT question_id,question_name,question_point,question_proposition FROM question WHERE question_id = '$question_id' " ;
-    $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+    $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
     if(empty($result)){
       response_message(404,"No data found");
       return;
@@ -61,7 +61,7 @@
   } else{
 
     $sql = " SELECT * FROM question WHERE question_id = '$question_id' " ;
-    $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+    $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
     if(empty($result)){
       response_message(404,"No data found");
       return;
@@ -82,4 +82,3 @@
       response_message(200,"Success",$results_array);
 
   }
- ?>

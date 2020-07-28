@@ -7,7 +7,7 @@
 
 
   $sql = "UPDATE student SET student_name = '$student_name'  WHERE student_id = '$student_id' ";
-  $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+  $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
     if(!($result)) {
         response_message(500,"Unsuccess");
         return;
@@ -15,5 +15,3 @@
         response_message(200,"Success, Change student name");
         return;
     }
-
- ?>

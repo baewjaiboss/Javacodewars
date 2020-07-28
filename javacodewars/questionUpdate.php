@@ -29,7 +29,7 @@
   
  /** check question_name ไปซ้ำกับ question_name ข้ออื่น  */
   $sql0 = " SELECT question_name FROM question WHERE teacher_user = '$teacher_user'  AND NOT question_id = '$question_id' " ;
-  $result0 = mysqli_query($dbcon,$sql0) or die(mysqli_error());
+  $result0 = mysqli_query($dbcon,$sql0) or die(mysqli_error($dbcon));
   while($row0 = mysqli_fetch_assoc($result0)){
     $question_name_check = $row0['question_name'];  
     if( $question_name_check === $question_name){
@@ -40,14 +40,14 @@
 
   /**แก้ไขคำถาม */
   $query = " UPDATE question SET question_name = '$question_name', question_point = '$question_point', question_proposition = '$question_proposition_str', question_guide = '$question_guide_str' , question_example = '$question_example_str'  WHERE question_id = '$question_id' " ;
-  $result = mysqli_query($dbcon,$query) or die(mysqli_error());
+  $result = mysqli_query($dbcon,$query) or die(mysqli_error($dbcon));
   if(!($result)){
     response_message(500,"Unsuccess");
     return;
   }
 
          $query2 = "SELECT testcase_id FROM testcase WHERE question_id = '$question_id' ";
-         $result2 = mysqli_query($dbcon,$query2) or die(mysqli_error());
+         $result2 = mysqli_query($dbcon,$query2) or die(mysqli_error($dbcon));
                 while($row = mysqli_fetch_assoc($result2)){
                     $testcase_id_array[] = $row['testcase_id'];  
                 }   
@@ -62,7 +62,7 @@
              $testcase_id = $testcase_id_array[$i] ;
             // echo "$testcase_id "."------>"."$testcase"."<br>";
              $query5 = " UPDATE testcase SET testcase_testcase = '$testcase' WHERE testcase_id = '$testcase_id' " ;
-             $result5 = mysqli_query($dbcon,$query5) or die(mysqli_error());
+             $result5 = mysqli_query($dbcon,$query5) or die(mysqli_error($dbcon));
              if(!($result5)){
                 response_message(500,"Unsuccess");
                 return;
@@ -75,6 +75,3 @@
         //mysqli_free_result($result3);
         mysqli_close($dbcon);
         response_message(200,"Success");
-   
-
- ?>

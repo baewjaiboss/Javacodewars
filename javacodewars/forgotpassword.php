@@ -17,11 +17,11 @@ require_once 'global.php' ;
 $email = (isset($_POST['email'])) ? $_POST['email'] : '';
 
 $query = " SELECT * FROM teacher where teacher_email = '$email' LIMIT 1 ";
-$result3 = mysqli_query($dbcon,$query) or die(mysqli_error());
+$result3 = mysqli_query($dbcon,$query) or die(mysqli_error($dbcon));
 $count = mysqli_num_rows($result3);
 
 $query2 = " SELECT * FROM student where student_email = '$email' LIMIT 1 ";
-$result2 = mysqli_query($dbcon,$query2) or die(mysqli_error());
+$result2 = mysqli_query($dbcon,$query2) or die(mysqli_error($dbcon));
 $count2 = mysqli_num_rows($result2);
 
 $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
@@ -37,7 +37,7 @@ $randomString_pass = '';
 
 if($count2 == 1){
   $sql = "UPDATE student SET student_pass = '$hash_pass' WHERE student_email = '$email' " ;
-  $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+  $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
   $mail = new PHPMailer(true);
 
   try {
@@ -136,5 +136,3 @@ if($count2 == 1){
         response_message(500,"Unsuccess");
     }
 }
-
-?>

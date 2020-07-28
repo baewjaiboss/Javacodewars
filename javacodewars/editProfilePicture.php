@@ -35,7 +35,7 @@
                 if (move_uploaded_file($_FILES['picture']['tmp_name'], /*$_SERVER['DOCUMENT_ROOT']."/".*/$upload_path)) {
                    $picture = $newImgName ;
                    $sql = "UPDATE student SET student_picture = '$picture' WHERE student_id = '$user' ";
-                   $result4 = mysqli_query($dbcon,$sql) or die(mysqli_error());
+                   $result4 = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
                     if(!($result4)){
                         response_message(500,"Unsuccess");
                         return;
@@ -66,7 +66,7 @@
                   if (move_uploaded_file($_FILES['picture']['tmp_name'], $upload_path)) {
                      $picture = $newImgName ;
                      $sql = "UPDATE student SET student_picture = '$picture' WHERE student_id = '$user' ";
-                     $result4 = mysqli_query($dbcon,$sql) or die(mysqli_error());
+                     $result4 = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
                       if(!($result4)){
                           response_message(500,"Unsuccess");
                           return;
@@ -104,7 +104,7 @@
                 if (move_uploaded_file($_FILES['picture']['tmp_name'], $upload_path)) {
                    $picture = $newImgName ;
                    $sql = "UPDATE teacher SET teacher_picture = '$picture' WHERE teacher_user = '$user' ";
-                   $result4 = mysqli_query($dbcon,$sql) or die(mysqli_error());
+                   $result4 = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
                     if(!($result4)){
                         response_message(500,"Unsuccess");
                         return;
@@ -136,7 +136,7 @@
                   if (move_uploaded_file($_FILES['picture']['tmp_name'], $upload_path)) {
                      $picture = $newImgName ;
                      $sql = "UPDATE teacher SET teacher_picture = '$picture' WHERE teacher_user = '$user' ";
-                     $result4 = mysqli_query($dbcon,$sql) or die(mysqli_error());
+                     $result4 = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
                       if(!($result4)){
                           response_message(500,"Unsuccess");
                           return;
@@ -154,6 +154,3 @@
       }
 
   }
-
-    
- ?>

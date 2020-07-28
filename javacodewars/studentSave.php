@@ -17,24 +17,24 @@ $question_guide_str = mysqli_real_escape_string($dbcon,$question_guide_decode);
 $answer_id = "" ;
 
     $query4 = " SELECT answer_id  FROM answer WHERE course_id = '$course_id' AND student_id = '$student_id' AND question_id = '$question_id'  " ;
-    $result4 = mysqli_query($dbcon,$query4) or die(mysqli_error());
+    $result4 = mysqli_query($dbcon,$query4) or die(mysqli_error($dbcon));
     $count4 = mysqli_num_rows($result4);
     
     if($count4 == 0) {
         $query = " INSERT INTO answer(course_id,student_id,question_id) VALUES ('$course_id','$student_id','$question_id')" ;
-        $result = mysqli_query($dbcon,$query) or die(mysqli_error());
+        $result = mysqli_query($dbcon,$query) or die(mysqli_error($dbcon));
             if(!($result)) {
                 response_message(500,"Unsuccess");
                 return;
             }else {
                 $query2 = " SELECT answer_id FROM answer WHERE course_id = '$course_id' AND student_id = '$student_id' AND question_id = '$question_id'  " ;
-                $result2 = mysqli_query($dbcon,$query2) or die(mysqli_error());
+                $result2 = mysqli_query($dbcon,$query2) or die(mysqli_error($dbcon));
                 $count2 = mysqli_num_rows($result2);
                     if($count2 == 1 ) {
                         $row2 = mysqli_fetch_assoc($result2);
                         $answer_id = $row2['answer_id'];
                         $query3 = " INSERT INTO submitsession(submitsession_code,submitsession_time,submitsession_copy_paste,submitsession_status,answer_id) VALUES ('$question_guide_str','$submitsession_time','$submitsession_copy_paste','$submitsession_status','$answer_id')" ;
-                        $result3 = mysqli_query($dbcon,$query3) or die(mysqli_error());
+                        $result3 = mysqli_query($dbcon,$query3) or die(mysqli_error($dbcon));
                             if(!($result3)) {
                                 response_message(500,"Unsuccess");
                                 return;
@@ -49,7 +49,7 @@ $answer_id = "" ;
         $row4 = mysqli_fetch_assoc($result4);
         $answer_id = $row4['answer_id'];
         $query3 = " INSERT INTO submitsession(submitsession_code,submitsession_time,submitsession_copy_paste,submitsession_status,answer_id) VALUES ('$question_guide_str','$submitsession_time','$submitsession_copy_paste','$submitsession_status','$answer_id')" ;
-        $result3 = mysqli_query($dbcon,$query3) or die(mysqli_error());
+        $result3 = mysqli_query($dbcon,$query3) or die(mysqli_error($dbcon));
             if(!($result3)) {
                 response_message(500,"Unsuccess");
                 return;
@@ -58,4 +58,3 @@ $answer_id = "" ;
         mysqli_close($dbcon);
         response_message(200,"Success");
     }
- ?>

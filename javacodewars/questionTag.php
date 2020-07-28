@@ -6,7 +6,7 @@
     $question_id = (isset($_POST['question_id'])) ? $_POST['question_id'] : '';
 
     $sql = " SELECT * FROM taglist INNER JOIN tag ON taglist.tag_id = tag.tag_id WHERE question_id = '$question_id' " ;
-    $result = mysqli_query($dbcon, $sql) or die(mysqli_error());
+    $result = mysqli_query($dbcon, $sql) or die(mysqli_error($dbcon));
 
     if(empty($result)){
         response_message(404,"No data found tag");
@@ -25,5 +25,3 @@
     mysqli_free_result($result);
     mysqli_close($dbcon);
     response_message(200,"Success",$results_array);
-
- ?>

@@ -6,7 +6,7 @@
 
 
   $sql = "SELECT student_name,student_email,student_picture FROM student WHERE student_id = '$student_id' LIMIT 1 ";
-  $result = mysqli_query($dbcon, $sql) or die(mysqli_error());
+  $result = mysqli_query($dbcon, $sql) or die(mysqli_error($dbcon));
   $results_array = array();
 
     if(empty($result)){
@@ -26,7 +26,3 @@
     mysqli_free_result($result);
     mysqli_close($dbcon);
     response_message(200,"Success",$results_array);
-
-    
-
- ?>

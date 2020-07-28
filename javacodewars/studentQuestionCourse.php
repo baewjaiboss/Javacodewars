@@ -25,7 +25,7 @@
     $array_tags = array();
 
     $sql2 = " SELECT * FROM taglist INNER JOIN tag ON taglist.tag_id = tag.tag_id WHERE question_id = '$question_id' " ;
-    $result2 = mysqli_query($dbcon, $sql2) or die(mysqli_error());
+    $result2 = mysqli_query($dbcon, $sql2) or die(mysqli_error($dbcon));
     while ($row2 = mysqli_fetch_assoc($result2)) {
       //echo $row3['tag_id']." " ;
       $tag_id = $row2['tag_id'];
@@ -55,5 +55,3 @@
     mysqli_free_result($result2);
     mysqli_close($dbcon);
     response_message(200,"Success",$results_array);
-
- ?>

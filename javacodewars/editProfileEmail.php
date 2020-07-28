@@ -7,11 +7,11 @@
  
     
     $query = "SELECT * FROM student WHERE student_id = '$user' LIMIT 1 ";
-    $result1 = mysqli_query($dbcon, $query) or die(mysqli_error());
+    $result1 = mysqli_query($dbcon, $query) or die(mysqli_error($dbcon));
     if($result1 -> num_rows == 1) {
 
         $email_check2 = "SELECT teacher_email FROM teacher WHERE teacher_email = '$email' LIMIT 1 ";
-        $result2 = mysqli_query($dbcon, $email_check2) or die(mysqli_error());
+        $result2 = mysqli_query($dbcon, $email_check2) or die(mysqli_error($dbcon));
             if($result2 -> num_rows == 1) {
                 mysqli_free_result($result1);
                 mysqli_free_result($result2);
@@ -20,7 +20,7 @@
             }
 
         $email_check3 = "SELECT student_email FROM student WHERE student_email = '$email' LIMIT 1";
-        $result3 = mysqli_query($dbcon, $email_check3) or die(mysqli_error());
+        $result3 = mysqli_query($dbcon, $email_check3) or die(mysqli_error($dbcon));
             
             if($result3 -> num_rows == 1) {
                 mysqli_free_result($result1);
@@ -30,7 +30,7 @@
                 return;
             }else {
                 $sql = "UPDATE student SET student_email = '$email'  WHERE student_id = '$user' ";
-                $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+                $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
                 if(!($result)) {
                     mysqli_free_result($result1);
                     mysqli_free_result($result2);
@@ -47,10 +47,10 @@
             }
     }else {
         $query = "SELECT * FROM teacher WHERE teacher_user = '$user' LIMIT 1 ";
-        $result1 = mysqli_query($dbcon, $query) or die(mysqli_error());
+        $result1 = mysqli_query($dbcon, $query) or die(mysqli_error($dbcon));
 
         $email_check2 = "SELECT teacher_email FROM teacher WHERE teacher_email = '$email' LIMIT 1 ";
-        $result2 = mysqli_query($dbcon, $email_check2) or die(mysqli_error());
+        $result2 = mysqli_query($dbcon, $email_check2) or die(mysqli_error($dbcon));
             if($result2 -> num_rows == 1) {
                 mysqli_free_result($result1);
                 mysqli_free_result($result2);
@@ -59,7 +59,7 @@
             }
 
         $email_check3 = "SELECT student_email FROM student WHERE student_email = '$email' LIMIT 1";
-        $result3 = mysqli_query($dbcon, $email_check3) or die(mysqli_error());
+        $result3 = mysqli_query($dbcon, $email_check3) or die(mysqli_error($dbcon));
             
             if($result3 -> num_rows == 1) {
                 mysqli_free_result($result1);
@@ -69,7 +69,7 @@
                 return;
             }else {
                 $sql = "UPDATE teacher SET teacher_email = '$email'  WHERE teacher_user = '$user' ";
-                $result = mysqli_query($dbcon,$sql) or die(mysqli_error());
+                $result = mysqli_query($dbcon,$sql) or die(mysqli_error($dbcon));
                 if(!($result)) {
                     mysqli_free_result($result1);
                     mysqli_free_result($result2);
@@ -86,8 +86,3 @@
             }
 
     }
-     
-   
-
-
- ?>
